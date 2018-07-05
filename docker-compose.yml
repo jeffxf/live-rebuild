@@ -1,0 +1,32 @@
+# docker-compose.yml
+# 
+# Dev settings are in: docker-compose.override.yml
+# 
+# Dev:
+#   docker-compose up --build --force-recreate
+#
+# Prod (ignore docker-compose.override.yml):
+#   docker-compose -f docker-compose.yml up --build --force-recreate
+#     OR
+#   docker stack deploy -c docker-compose.yml --with-registry-auth stackname
+# 
+
+version: '3.5'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILD_ENV: prod
+        APP_NAME: ${APP_NAME}
+        REPO_PATH: ${REPO_PATH}
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      GIN_MODE: release
+      PORT: 8080
+
+

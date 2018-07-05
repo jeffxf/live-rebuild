@@ -1,0 +1,17 @@
+# docker-compose.override.yml
+# 
+# Dev specific settings
+# 
+
+version: '3.5'
+
+services:
+  web:
+    build:
+      args:
+        BUILD_ENV: dev
+    volumes:
+      - ./src:/go/src/${REPO_PATH}/src
+      - ./Makefile:/go/src/${REPO_PATH}/Makefile
+    environment:
+      GIN_MODE: debug
