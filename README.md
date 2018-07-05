@@ -1,6 +1,6 @@
 # Live Rebuild
 
-This example template will live-rebuild apps in a docker container via [fswatch](https://github.com/emcrisostomo/fswatch). A very simple golang (gin) webserver is used as the example which is in the src/ directory. This could easily be modified to work with other languages as well.
+This example template will live-rebuild golang apps in a docker container via [fswatch](https://github.com/emcrisostomo/fswatch). A very simple webserver (gin) is used as the example which is in the `src/` directory. This could easily be modified to work with other languages as well.
 
 Got the idea from [here](https://medium.com/@olebedev/live-code-reloading-for-golang-web-projects-in-19-lines-8b2e8777b1ea). Just made a few tweaks & applied it to docker.
 
@@ -47,6 +47,8 @@ web_1  | [GIN-debug] Listening and serving HTTP on :8080
 - Golang code should be stored in the **`src/`** directory.
 - The **`REPO_PATH`** variable in the **`.env`** file specifies the path of the repo to ensure the app is built correctly.
 - The `go get` command will be ran on each rebuild to download new dependencies if the `src/vendor/` directory doesn't exist.
+- `cmd.sh` is run when the container starts which calls the Makefile if running in dev mode.
+- The Makefile uses fswatch to watch for changes and rebuilds/reruns the app.
 
 ### Dev
 
